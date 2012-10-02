@@ -6,7 +6,7 @@ grails.project.target.level = 1.7
 grails.project.source.level = 1.7
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 
-grails.tomcat.nio = false
+grails.tomcat.nio = true
 
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
@@ -38,6 +38,21 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
         // runtime 'mysql:mysql-connector-java:5.1.20'
+		
+		/*
+		def tomcatVersion = "7.0.28"
+		build("org.apache.tomcat:tomcat-catalina-ant:$tomcatVersion") {
+			transitive = false
+		}
+		build "org.apache.tomcat.embed:tomcat-embed-core:$tomcatVersion"
+		build "org.apache.tomcat.embed:tomcat-embed-jasper:$tomcatVersion"
+		build "org.apache.tomcat.embed:tomcat-embed-logging-log4j:$tomcatVersion"
+
+		// needed for JSP compilation
+		runtime "org.eclipse.jdt.core.compiler:ecj:3.6.2"
+
+		build "org.grails:grails-plugin-tomcat:${grailsVersion}"
+		*/
     }
 
     plugins {
@@ -51,9 +66,15 @@ grails.project.dependency.resolution = {
         //runtime ":yui-minify-resources:0.1.4"
 		
 		compile ":platform-core:1.0.M6"
-		compile ":events-push:1.0.M2-SNAPSHOT"
+		compile ":events-push:1.0.M3"
 
-        build ":tomcat:$grailsVersion"
+        /*
+         * TOMCAT dependencies
+         */
+		
+		build ":tomcat:$grailsVersion" // regular tomcat plugin
+		
+//		compile ":jetty:2.0.1"
 
         runtime ":database-migration:1.1"
 
